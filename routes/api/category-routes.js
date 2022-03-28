@@ -42,7 +42,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   // create a new category
   Category.create({
-    Category_name: req.body.Category_name,
+    category_name: req.body.category_name,
   })
   .then(dbCategoryData => res.json (dbCategoryData))
   .catch(err => {
@@ -53,11 +53,7 @@ router.post('/', (req, res) => {
   
 
 router.put('/:id', (req, res) => {
-  Category.update(
-    {
-      Category_name: req.body.category_name,
-    },
-    {
+  Category.update(req.body, {
       where: {
         id: req.params.id,
       },
@@ -77,7 +73,7 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete a category by its `id` value
-  Category.delete({
+  Category.destroy({
     where: {
       id: req.params.id,
     }
